@@ -1,6 +1,7 @@
 package dukeChoice;
 
 import java.sql.SQLOutput;
+import java.util.Arrays;
 
 public class ShopApp {
     public static void main(String[] args){
@@ -17,12 +18,10 @@ public class ShopApp {
 
         System.out.println("Min price "+ Clothing.MIN_PRICE );
 
-        Clothing item1= new Clothing("Blue Jacket", 20.0, "M");
+        Clothing item1= new Clothing("Blue Jacket", 20.9, "M");
         Clothing item2 = new Clothing("Orange T-Shirt",10.5,"S");
 
         Clothing items[] = {item1, item2, new Clothing("Green Scarf",5.0,"S"), new Clothing("Blue T-Shirt",10.5,"S")};
-
-
 
 //        item2.setDescription("Orange T-Shirt");
 //        item2.setPrice(10.5);
@@ -41,17 +40,32 @@ public class ShopApp {
 
 //        total = (item1.price + item2.price * 2) * (1 + tax);
 //        System.out.println("Total = " + total);
-
         int measurement = 8;
         c1.addItems(items);
 //        c1.setSize(measurement);
         System.out.println("Customer is " + c1.getName() + ", " + c1.getSize() + ", " + c1.getTotalClothingCost());
 
         for (Clothing item: c1.getItems()){// items
-            System.out.println("Items "+ item.getDescription());
-
+//            System.out.println("Items "+ item.getDescription() + ", "+ item.getSize() +", "+ item.getPrice());
+            System.out.println("Item output "+ item);
         }
-/*        for (Clothing item : items){
+        int average = 0;
+        int count = 0;
+
+        for (Clothing item : c1.getItems()){
+            if(item.getSize().equals("L")) {
+                count++;
+                average += item.getPrice(); // agregamos el item al promedio
+            }
+        }
+        try{
+            average = (count == 0) ? 0 : average/count;
+//            average = average /count;
+            System.out.println("Average price "+ average + ", Count "+ count);
+        }catch(ArithmeticException e){
+            System.out.println("Don't divide by 0");
+        }
+        /*        for (Clothing item : items){
             if(c1.getSize().equals(item.getSize())){
                 total = total + item.getPrice();
                 System.out.println("Item " + "," + item.getDescription() + ","+ item.getPrice() + "," + item.getSize());
@@ -60,6 +74,10 @@ public class ShopApp {
             }
         }
         System.out.println("Total = " + total);*/
-
+        Arrays.sort(c1.getItems());
+        for (Clothing item: c1.getItems()){// items
+//            System.out.println("Items "+ item.getDescription() + ", "+ item.getSize() +", "+ item.getPrice());
+            System.out.println("Item output "+ item);
+        }
     }
 }
